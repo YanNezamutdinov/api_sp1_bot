@@ -7,10 +7,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-PRACTICUM_TOKEN = os.getenv("PRACTICUM_TOKEN")
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+#PRACTICUM_TOKEN = os.getenv("PRACTICUM_TOKEN")
+#TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+#CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 #PRACTICUM_URI = os.getenv('PRACTICUM_URI')
+PRACTICUM_TOKEN = 'AgAAAAAV6nMsAAYckTc2vn52JkiKkvjfOk9JNX4'
+CHAT_ID = '442705067'
+TELEGRAM_TOKEN = '1319699577:AAH0aB76iDHBZbTZk4bobS6chchG39roHbw'
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
