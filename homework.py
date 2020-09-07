@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-PRACTICUM_TOKEN = os.environ("PRACTICUM_TOKEN")
-TELEGRAM_TOKEN = os.environ('TELEGRAM_TOKEN')
-CHAT_ID = os.environ('TELEGRAM_CHAT_ID')
-PRACTICUM_URI = os.environ('PRACTICUM_URI')
+PRACTICUM_TOKEN = os.getenv("PRACTICUM_TOKEN")
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+#PRACTICUM_URI = os.getenv('PRACTICUM_URI')
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
@@ -24,10 +24,10 @@ def parse_homework_status(homework):
 
 
 def get_homework_statuses(current_timestamp):
+    url = 'https://praktikum.yandex.ru/api/user_api/homework_statuses/'
     headers = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
     params = {'from_date': current_timestamp}
-    homework_statuses = requests.get(PRACTICUM_URI, params=params, headers=headers)
-    print(homework_statuses.json())
+    homework_statuses = requests.get(url, params=params, headers=headers)
     return homework_statuses.json()
 
 
