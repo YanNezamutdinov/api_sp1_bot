@@ -13,10 +13,9 @@ CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
-
 def parse_homework_status(homework):
-    if homework.get('homework_name'):
-        homework_name = homework.get('homework_name')
+    homework_name = homework.get('homework_name')
+    if homework_name:
         if homework.get('status') == 'rejected':
             verdict = 'К сожалению в работе нашлись ошибки.'
         else:
