@@ -3,6 +3,7 @@ import requests
 import telegram
 import time
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
 
@@ -14,14 +15,18 @@ bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
 def parse_homework_status(homework):
-    homework_name = homework.get('homework_name')
-    if homework_name:
-        if homework.get('status') == 'rejected':
+    
+    if 'homework_name' and 'status' in homework:
+        homework_name = homework.get('homework_name')
+        status = homework.get('status')
+        if status == 'rejected':
             verdict = 'К сожалению в работе нашлись ошибки.'
-        else:
+        elif status == 'approved':
             verdict = 'Ревьюеру всё понравилось, можно приступать к следующему уроку.'
+        else:
+            return f'Прилетел странный статус! status = {status}'
         return f'У вас проверили работу "{homework_name}"!\n\n{verdict}'
-    return "Oops! homework_name not found!"
+    return "Oops! homework_name or status not found!"
 
 
 def get_homework_statuses(current_timestamp):
@@ -31,7 +36,7 @@ def get_homework_statuses(current_timestamp):
     try:
         homework_statuses = requests.get(url, params=params, headers=headers)
     except Exception as e:
-        return print(f'Oops! Error: {e}')
+        logging.info(f'Oops! Error: {e}')
     return homework_statuses.json()
 
 
